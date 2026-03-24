@@ -52,6 +52,18 @@ break;case"<bookViews":;case"<bookViews>":;case"</bookViews>":break;case"<workbo
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;min-height:100vh;overscroll-behavior:none}
 
+
+/* HOME PAGE */
+.home-nav-btn{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:14px 10px;color:var(--mid);font-family:var(--mono);font-size:11px;
+  font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  cursor:pointer;touch-action:manipulation;-webkit-appearance:none;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  transition:all .15s;
+}
+.home-nav-btn:active{border-color:var(--accent);color:var(--accent);}
+
 /* HEADER */
 .hdr{padding:16px 16px 0;background:var(--bg);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border)}
 .hdr-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
@@ -217,7 +229,8 @@ input[type=file]#cam-in{display:none}
     <span id="next-backup-txt" style="color:var(--dim)">backup in 5</span>
   </div>
   <div class="tabs" id="tab-bar">
-    <button class="tab active" data-page="ceilings">Ceilings</button>
+    <button class="tab active" data-page="home">Home</button>
+    <button class="tab" data-page="ceilings">Ceilings</button>
     <button class="tab" data-page="skus">SKUs</button>
     <button class="tab" data-page="questions">Questions</button>
     <button class="tab" data-page="scorecard">Scorecard</button>
@@ -228,15 +241,80 @@ input[type=file]#cam-in{display:none}
 <input type="file" id="cam-in" accept="image/*" capture="environment" multiple>
 <input type="file" id="import-in" accept="application/json,.json" style="display:none">
 
+<!-- ═══════════════════════════════════════════════ PAGE: HOME -->
+<div class="page active" id="page-home">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 120px);padding:32px 24px;text-align:center">
+
+    <!-- Logo block -->
+    <div style="font-family:var(--mono);font-size:42px;font-weight:700;color:var(--accent);letter-spacing:.04em;margin-bottom:6px">MAMU</div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;margin-bottom:56px">Canton Fair · Apr 23 – May 3</div>
+
+    <!-- Big + button -->
+    <button type="button" id="home-add-btn" style="
+      width:100%;max-width:320px;
+      padding:22px;
+      background:var(--accent);
+      color:#0e0e0e;
+      font-family:var(--mono);
+      font-size:15px;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+      touch-action:manipulation;
+      -webkit-appearance:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      margin-bottom:16px;
+      transition:opacity .15s;
+    ">
+      <span style="font-size:28px;line-height:1;margin-top:-2px">+</span>
+      New Supplier
+    </button>
+
+    <!-- Quick links -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:320px;margin-bottom:48px">
+      <button type="button" class="home-nav-btn" data-page="saved">
+        <span style="font-size:18px">📋</span>
+        <span>Saved</span>
+      </button>
+      <button type="button" class="home-nav-btn" data-page="questions">
+        <span style="font-size:18px">❓</span>
+        <span>Questions</span>
+      </button>
+      <button type="button" class="home-nav-btn" data-page="ceilings">
+        <span style="font-size:18px">📊</span>
+        <span>Ceilings</span>
+      </button>
+      <button type="button" class="home-nav-btn" data-page="skus">
+        <span style="font-size:18px">📦</span>
+        <span>SKUs</span>
+      </button>
+    </div>
+
+    <!-- Live counter -->
+    <div style="font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase" id="home-counter">— suppliers saved</div>
+    <div style="margin-top:8px;display:flex;align-items:center;gap:6px">
+      <div class="fs-dot" id="home-fs-dot" style="width:6px;height:6px;border-radius:50%;background:var(--dim)"></div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--dim)" id="home-sync-status">not synced</div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════════════════ PAGE: CEILINGS -->
-<div class="page active" id="page-ceilings">
+<div class="page" id="page-ceilings">
   <p class="sec-label">Max Landed Cost · 60% Margin Floor</p>
   <div class="sku-grid">
-    <div class="sku-row"><div><div class="sku-name">Bag</div><div class="sku-sub">Retail €149 · Target €42</div></div><div><div class="sku-ceil">€52</div><div class="ceil-lbl">max landed</div></div></div>
-    <div class="sku-row"><div><div class="sku-name">Changing Pad</div><div class="sku-sub">Retail €39 · Target €13</div></div><div><div class="sku-ceil">€16</div><div class="ceil-lbl">max landed</div></div></div>
-    <div class="sku-row"><div><div class="sku-name">Silicone Cup</div><div class="sku-sub">Retail €22 · Target €8</div></div><div><div class="sku-ceil">€9</div><div class="ceil-lbl">max landed</div></div></div>
-    <div class="sku-row warn"><div><div class="sku-name">Thermal Container ⚠</div><div class="sku-sub">Retail €28 · Target €9</div></div><div><div class="sku-ceil warn">€11</div><div class="ceil-lbl">max landed</div></div></div>
-    <div class="sku-row"><div><div class="sku-name">Pacifier + Case</div><div class="sku-sub">Retail €18 · Target €6</div></div><div><div class="sku-ceil">€7</div><div class="ceil-lbl">max landed</div></div></div>
+    <div class="sku-row"><div><div class="sku-name">Bag</div><div class="sku-sub">Retail €119 · Target €42</div></div><div><div class="sku-ceil">€47.60</div><div class="ceil-lbl">max landed</div></div></div>
+    <div class="sku-row"><div><div class="sku-name">Changing Pad</div><div class="sku-sub">Retail €39 · Target €13</div></div><div><div class="sku-ceil">€15.60</div><div class="ceil-lbl">max landed</div></div></div>
+    <div class="sku-row"><div><div class="sku-name">Silicone Cup</div><div class="sku-sub">Retail €22 (2-pack) · Target €8</div></div><div><div class="sku-ceil">€8.80</div><div class="ceil-lbl">max landed</div></div></div>
+    <div class="sku-row warn"><div><div class="sku-name">Thermal Container ⚠</div><div class="sku-sub">Retail €28 · Target €9</div></div><div><div class="sku-ceil warn">€11.20</div><div class="ceil-lbl">max landed</div></div></div>
+    <div class="sku-row"><div><div class="sku-name">Pacifier + Case</div><div class="sku-sub">Retail €22 · Target €6</div></div><div><div class="sku-ceil">€8.80</div><div class="ceil-lbl">max landed</div></div></div>
+    <div class="sku-row"><div><div class="sku-name">Bib</div><div class="sku-sub">Retail €16 · Target €4</div></div><div><div class="sku-ceil">€6.40</div><div class="ceil-lbl">max landed</div></div></div>
   </div>
   <div class="banner red"><div class="banner-t">⛔ Kill Criteria #1</div><div class="banner-b">Any quote above Max Landed = walk. No negotiation. Reprice or drop the SKU.</div></div>
   <div class="banner amber"><div class="banner-t">⚠ Thermal Container</div><div class="banner-b">Tight margin. If 2 of 3 suppliers quote above €11, reprice to €32+ or cut from launch.</div></div>
@@ -246,44 +324,52 @@ input[type=file]#cam-in{display:none}
 <div class="page" id="page-skus">
   <p class="sec-label">Product Briefs · Show Suppliers If Needed</p>
   <div class="sku-card">
-    <div class="sku-card-hdr"><div class="sku-card-nm">BAG — Hero SKU</div><div class="sku-card-pr">€149 retail</div></div>
+    <div class="sku-card-hdr"><div class="sku-card-nm">BAG — Hero SKU</div><div class="sku-card-pr">€119 retail</div></div>
     <div class="drow"><div class="dkey">Problem</div><div class="dval">Bags are ugly or impractical. Parents choose between style and function.</div></div>
     <div class="drow"><div class="dkey">Product</div><div class="dval">Premium changing/carry bag. Scandi-minimal, built for real parents.</div></div>
-    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€52</div></div>
-    <div class="drow"><div class="dkey">MOQ</div><div class="dval">300 units · 2 colorways</div></div>
+    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€47.60</div></div>
+    <div class="drow"><div class="dkey">MOQ</div><div class="dval">300 units · 3 colorways — quantities confirmed post-KS based on backer demand.</div></div>
     <div class="drow"><div class="dkey">Must-have</div><div class="dval">Water-resistant, stroller straps, EU export exp., CE/REACH capable</div></div>
   </div>
   <div class="sku-card">
     <div class="sku-card-hdr"><div class="sku-card-nm">CHANGING PAD</div><div class="sku-card-pr">€39 retail</div></div>
     <div class="drow"><div class="dkey">Problem</div><div class="dval">Mats are flimsy or bulky. Nothing folds cleanly and looks good.</div></div>
     <div class="drow"><div class="dkey">Product</div><div class="dval">Foldable pad. Wipeable, compact, aesthetically neutral.</div></div>
-    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€16</div></div>
-    <div class="drow"><div class="dkey">MOQ</div><div class="dval">500 units · 2 colorways</div></div>
+    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€15.60</div></div>
+    <div class="drow"><div class="dkey">MOQ</div><div class="dval">500 units · 3 colorways — quantities confirmed post-KS based on backer demand.</div></div>
     <div class="drow"><div class="dkey">Must-have</div><div class="dval">Skin-safe, folds to A4 or smaller, wipeable</div></div>
   </div>
   <div class="sku-card">
-    <div class="sku-card-hdr"><div class="sku-card-nm">SILICONE CUP</div><div class="sku-card-pr">€22 retail</div></div>
+    <div class="sku-card-hdr"><div class="sku-card-nm">SILICONE CUP</div><div class="sku-card-pr">€22 retail (2-pack)</div></div>
     <div class="drow"><div class="dkey">Problem</div><div class="dval">Sippy cups create dependency. Open cups tip and look terrible.</div></div>
-    <div class="drow"><div class="dkey">Product</div><div class="dval">Open training cup. Soft silicone, weighted base, no lid. Ages 6m+.</div></div>
-    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€9</div></div>
-    <div class="drow"><div class="dkey">MOQ</div><div class="dval">500 units · 2 colorways</div></div>
+    <div class="drow"><div class="dkey">Product</div><div class="dval">Open training cup. Soft silicone, weighted base, no lid. Ages 6m+. Sold as 2-pack.</div></div>
+    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€8.80</div></div>
+    <div class="drow"><div class="dkey">MOQ</div><div class="dval">500 units · 3 colorways — quantities confirmed post-KS based on backer demand.</div></div>
     <div class="drow"><div class="dkey">Must-have</div><div class="dval">Food-grade silicone, EN 14350 capable, BPA-free cert</div></div>
   </div>
   <div class="sku-card warn">
     <div class="sku-card-hdr"><div class="sku-card-nm">THERMAL CONTAINER ⚠</div><div class="sku-card-pr">€28 retail</div></div>
     <div class="drow"><div class="dkey">Problem</div><div class="dval">Keeping baby food warm on the go without bulk or bad design.</div></div>
     <div class="drow"><div class="dkey">Product</div><div class="dval">Small thermal food container. Minimal, fits in the bag.</div></div>
-    <div class="drow"><div class="dkey">Max Landed</div><div class="dval amber">€11 · TIGHT</div></div>
-    <div class="drow"><div class="dkey">MOQ</div><div class="dval">500 units · 2 colorways</div></div>
-    <div class="drow"><div class="dkey">Watch out</div><div class="dval" style="color:var(--amber);text-align:right">If ex-factory > ~€8, margin breaks.</div></div>
+    <div class="drow"><div class="dkey">Max Landed</div><div class="dval amber">€11.20 · TIGHT</div></div>
+    <div class="drow"><div class="dkey">MOQ</div><div class="dval">500 units · 3 colorways — quantities confirmed post-KS based on backer demand.</div></div>
+    <div class="drow"><div class="dkey">Watch out</div><div class="dval" style="color:var(--amber);text-align:right">If ex-factory > ~€9, margin breaks.</div></div>
   </div>
   <div class="sku-card">
-    <div class="sku-card-hdr"><div class="sku-card-nm">PACIFIER + CASE</div><div class="sku-card-pr">€18 retail</div></div>
+    <div class="sku-card-hdr"><div class="sku-card-nm">PACIFIER + CASE</div><div class="sku-card-pr">€22 retail</div></div>
     <div class="drow"><div class="dkey">Problem</div><div class="dval">Pacifiers don't match the aesthetic parents build around their child.</div></div>
     <div class="drow"><div class="dkey">Product</div><div class="dval">White-label orthodontic pacifier + MAMU collectible case.</div></div>
-    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€7</div></div>
-    <div class="drow"><div class="dkey">MOQ</div><div class="dval">1000 units · 2 colorways</div></div>
+    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€8.80</div></div>
+    <div class="drow"><div class="dkey">MOQ</div><div class="dval">1000 units · 3 colorways — quantities confirmed post-KS based on backer demand.</div></div>
     <div class="drow"><div class="dkey">Must-have</div><div class="dval">EN 1400 compliant, existing CE cert preferred, customizable case</div></div>
+  </div>
+  <div class="sku-card">
+    <div class="sku-card-hdr"><div class="sku-card-nm">BIB</div><div class="sku-card-pr">€16 retail</div></div>
+    <div class="drow"><div class="dkey">Problem</div><div class="dval">Every bib is forgettable muslin or clinical silicone. Nobody has treated it as a design object.</div></div>
+    <div class="drow"><div class="dkey">Product</div><div class="dval">Premium fabric bib with a graphic that tells the brand story. The most visible product in the system.</div></div>
+    <div class="drow"><div class="dkey">Max Landed</div><div class="dval hi">€6.40</div></div>
+    <div class="drow"><div class="dkey">MOQ</div><div class="dval">500 units · 3 colorways — quantities confirmed post-KS based on backer demand.</div></div>
+    <div class="drow"><div class="dkey">Must-have</div><div class="dval">Premium fabric, organic cotton, graphic print, snap closure</div></div>
   </div>
 </div>
 
@@ -723,6 +809,7 @@ document.getElementById('tab-bar').addEventListener('click',function(e){
   document.getElementById(pid).classList.add('active');
   b.classList.add('active');
   if(pid==='page-saved')render();
+  if(pid==='page-home')updateHomeCounter();
 });
 
 /* ─────────────────────────────────────────────
@@ -967,11 +1054,12 @@ function switchToSaved(){
 function overCeil(sku,cost){
   if(!sku||!cost)return false;
   var s=sku.toLowerCase(),c=parseFloat(cost);
-  if(s.indexOf('bag')!==-1)return c>52;
-  if(s.indexOf('pad')!==-1)return c>16;
-  if(s.indexOf('cup')!==-1)return c>9;
-  if(s.indexOf('thermal')!==-1)return c>11;
-  if(s.indexOf('pacifier')!==-1)return c>7;
+  if(s.indexOf('bag')!==-1)return c>47.6;
+  if(s.indexOf('pad')!==-1)return c>15.6;
+  if(s.indexOf('cup')!==-1)return c>8.8;
+  if(s.indexOf('thermal')!==-1)return c>11.2;
+  if(s.indexOf('pacifier')!==-1)return c>8.8;
+  if(s.indexOf('bib')!==-1)return c>6.4;
   return false;
 }
 function sortList(list){return list.slice().sort(function(a,b){return(b.avg||0)-(a.avg||0);});}
@@ -1274,12 +1362,46 @@ document.getElementById('clear-btn').addEventListener('click',function(){
   dbClear(function(){render();toast('Cleared');});
 });
 
+
+/* HOME PAGE WIRING */
+document.getElementById('home-add-btn').addEventListener('click',function(){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('page-scorecard').classList.add('active');
+  document.querySelector('[data-page="scorecard"]').classList.add('active');
+  /* scroll form to top */
+  window.scrollTo(0,0);
+});
+
+document.querySelectorAll('.home-nav-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var pid='page-'+btn.getAttribute('data-page');
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+    document.getElementById(pid).classList.add('active');
+    var tabBtn=document.querySelector('[data-page="'+btn.getAttribute('data-page')+'"]');
+    if(tabBtn)tabBtn.classList.add('active');
+    if(pid==='page-saved')render();
+  });
+});
+
+function updateHomeCounter(){
+  dbAll(function(list){
+    var n=list.length;
+    document.getElementById('home-counter').textContent=n+' supplier'+(n!==1?'s':'')+' saved';
+  });
+}
+
+/* Mirror firebase dot on home page */
+var _origUpdateFsDot=updateFsDot;
+
 /* ─────────────────────────────────────────────
    INIT
 ───────────────────────────────────────────── */
 openDB(function(){
   render();
   updatePhotoUI();
+  updateHomeCounter();
   dbAll(function(list){updateCounterBar(list.length);});
   initFirebase();
   initDrive();
